@@ -295,6 +295,24 @@
         </ul>
     </section>
 
+    <div class="center-container">
+        <h2>Gallery</h2>
+    </div>
+
+    <div class="gallery-container">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/JTltnQrI5sg" width="560" height="315" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/UxRnZcLIe3c" width="560" height="315" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/FDM_bT0-RyY" width="560" height="315" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+    </div>
 
     <div class="contact-container">
         <div class="contact-info">
@@ -345,6 +363,27 @@
         });
     </script>
 
+    <script>
+        // オートスクロールを実行する関数
+        function autoScrollVideos() {
+            const videosContainer = document.querySelector('.gallery-container');
+
+            // 現在のスクロール位置
+            let scrollPosition = videosContainer.scrollLeft;
+
+            // スクロール速度を調整
+            const scrollSpeed = 0.5;
+            videosContainer.scrollLeft = scrollPosition + scrollSpeed;
+
+            // スクロールが終わったら最初から繰り返す
+            if (videosContainer.scrollLeft >= videosContainer.scrollWidth - videosContainer.clientWidth) {
+                videosContainer.scrollLeft = 0;
+            }
+        }
+
+        // 一定時間ごとにオートスクロールを実行
+        setInterval(autoScrollVideos, 5); // 50ミリ秒ごとにスクロール
+    </script>
 </body>
 
 </html>
