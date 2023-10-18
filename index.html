@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Yuki kadokawa</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #c6c4d5, #4a76e6);
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 30px;
+            position: fixed;
+            width: 100%;
+            background-color: #f2f2f2;
+            z-index: 1000;
+            top: 60px;
+        }
+
+        nav a {
+            margin-right: 5px;
+            margin: 7px;
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        section {
+            max-width: 70%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #474646;
+            background-color: #ffffff;
+            border-radius: 8px;
+        }
+
+        .spacer {
+            height: 280px;
+        }
+
+        .contact-container {
+            text-align: center;
+        }
+
+        .access-container {
+            text-align: center;
+        }
+
+        .contact-info {
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 0px;
+        }
+
+        #emailLink {
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            padding: 10px;
+        }
+
+        #emailLink:hover {
+            background-color: #3855e536;
+            border-radius: 6px;
+        }
+
+        #LinkButton {
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            padding: 10px;
+        }
+
+        #LinkButton:hover {
+            background-color: #3855e536;
+            border-radius: 6px;
+        }
+
+        .photo-frame {
+            border: 0px solid #333;
+            border-radius: 30px;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .photo-frame img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .center-container {
+            text-align: center;
+        }
+
+        .gallery-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow-x: scroll;
+            white-space: nowrap;
+            border: 3px solid #333;
+            border-radius: 6px;
+            background-color: #333;
+        }
+
+        .video-container {
+            display: inline-block;
+            width: 560px;
+            height: 315px;
+            margin-right: 20px;
+        }
+
+        h3 {
+            color: rgb(64, 64, 249);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Yuki Kadokawa</h1>
+    </header>
+
+    <nav>
+        <a href="#Education">Education</a>
+        <a href="#Publicatin">Publicatin</a>
+        <a href="#Award">Award</a>
+        <a href="#Scholarship & Grant">Scholarship & Grant</a>
+        <a href="#Work history">Work history</a>
+        <a href="#Research Field">Research Field</a>
+    </nav>
+
+    <div class="spacer"></div>
+
+    <div class="center-container">
+        <div class="photo-frame">
+            <img src="./selfphoto.png" alt="self photo">
+        </div>
+    </div>
+
+    <section id="Education">
+        <h2>Education</h2>
+        <ul>
+            <li>Doctor of Engineering, Nara Institute of Science and Technology, Program of Information Science and
+                Engineering, Japan, 2024 (estimated)</li>
+            <li>Master of Engineering, Nara Institute of Science and Technology, Program of Information Science and
+                Engineering, Japan, 2021</li>
+            <li>Bachelor of Engineering, Toyama Prefectural University, Department of Intelligent Robotics, Japan, 2019
+            </li>
+        </ul>
+    </section>
+
+    <section id="Publicatin">
+        <h2>Publicatin</h2>
+        <h3>International Journal</h3>
+        <ol>
+            <li><strong>Yuki Kadokawa</strong>, Tomohito Kodera, Yoshihisa Tsurumine, Shinya
+                Nishimura, and Takamitsu Matsubara, "Robust Iterative Value Conversion: Deep Reinforcement Learning for
+                Neurochip-driven Edge Robots", Robotics and Autonomous Systems (RAS), under review
+            </li>
+            <li><strong>Yuki Kadokawa</strong>, Lingwei Zhu, Yoshihisa Tsurumine and Takamitsu Matsubara, "Cyclic Policy
+                Distillation:
+                Sample-Efficient Sim-to-Real Reinforcement Learning with Domain Randomization", Robotics and Autonomous
+                Systems (RAS), 2023
+                <a href="https://arxiv.org/pdf/2207.14561" target="_blank">[Paper]</a>
+                <a href="https://www.youtube.com/watch?v=UxRnZcLIe3c&t=1s" target="_blank">[Video]</a>
+            </li>
+            <li><strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara, "Binarized P-Network: Deep
+                Reinforcement Learning of Robot Control from Raw Images on FPGA", IEEE Robotics and Automation Letters
+                (RA-L), vol. 6,
+                no. 4, pp. 8545-8552, 2021 <strong>(Student Paper Award)</strong>
+                <a href="https://arxiv.org/pdf/2109.04966" target="_blank">[Paper]</a>
+                <a href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank">[Video]</a>
+            </li>
+        </ol>
+
+        <h3>International Conference</h3>
+        <ol>
+            <li><strong>Yuki Kadokawa</strong>, Masashi Hamaya, and Kazutoshi Tanaka, "Learning Robotic Powder Weighing
+                from
+                Simulation for Laboratory Automation", IEEE/RSJ International Conference on Intelligent Robots and
+                Systems (IROS), 2023
+                <a href="https://omron-sinicx.github.io/powder-weighing/" target="_blank">[Project Page]</a>
+                <a href="https://www.researchgate.net/publication/373992199_Learning_Robotic_Powder_Weighing_from_Simulation_for_Laboratory_Automation"
+                    target="_blank">[Paper]</a>
+                <a href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank">[Video]</a>
+            </li>
+            <li><strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara, "Binarized P-Network:
+                Deep
+                Reinforcement Learning of Robot Control from Raw Images on FPGA", IEEE International Conference on
+                Robotics and Automation (ICRA, RA-L option), 2023
+                <a href="https://arxiv.org/pdf/2109.04966" target="_blank">[Paper]</a>
+                <a href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank">[Video]</a>
+            </li>
+        </ol>
+    </section>
+
+    <section id="Award">
+        <h2>Award</h2>
+        <ol>
+            <li>Nara Institute of Science and Technology, Symposium of University Fellowship, Outstanding
+                Student Award, 2022 <a href="http://isw3.naist.jp/IS/PubWG/Events-ja/award20221007_kadokawa.html"
+                    target="_blank">[Award
+                    Page]</a> </li>
+            <li>IEEE Kansai Section, Student Paper Award, 2022 Student Award, 2022 <a
+                    href="http://isw3.naist.jp/IS/PubWG/Events-ja/award20220222_kadokawa.html" target="_blank">[NAIST
+                    Award
+                    Page]</a> <a href="https://www.ieee-jp.org/section/kansai/award/studentlist.html"
+                    target="_blank">[IEEE Award Page]</a> </li>
+            </li>
+            <li>Toyama Prefectural University, Best Student of the Year, 2019</li>
+            <li>Toyama Mechanical and Electrical Industries Association, Monozukuri in Toyama, Grand Prize, 2018</li>
+            <li>Japan Society for Design Engineering, Design Competition, Best Presentation Award, 2018 </li>
+            <li>Japan Society for Design Engineering, Design Competition, 3rd Place (National Finals 3/10), 2018</li>
+            <li>Japan Society for Design Engineering, Research Presentation, Best Student Presentation Award, 2018</li>
+            <li>Japan Society for Design Engineering, Design Competition, Best Presentation Award, 2017 </li>
+            <li>Toyama Prefectural Takaoka Kogei High School, Best Student of the Year, 2015</li>
+        </ol>
+    </section>
+
+    <section id="Scholarship & Grant">
+        <h2>Scholarship & Grant</h2>
+        <ol>
+            <li>Japan Student Services Organization, Scholarship (Return Exemption Full Amount), 2023</li>
+            <li>Japan Society for the Promotion of Science, Research Fellowship for Young Scientists (Obtaining Research
+                Funding and Salaries), 2023</li>
+            <li>Japan Science and Technology Agency, Research Fellowship (Obtaining Research Funding and Salaries), 2022
+                <a href="http://isw3.naist.jp/IS/is-fellowship/pr/interview/2022/kadokawa/index.html"
+                    target="_blank">[Interview
+                    Page]</a>
+            </li>
+            <li>Japan Student Services Organization, Scholarship (Return Exemption Half Amount), 2021</li>
+            <li>Nara Institute of Science and Technology, Outstanding Student Scholarship (Tuition Exemption), 2021</li>
+        </ol>
+    </section>
+
+    <section id="Work history">
+        <h2>Work history</h2>
+        <ol>
+            <li>
+                August - October 2023, Robotics Systems Lab (ETH Zurich), Visiting Researcher
+            </li>
+            <li>
+                April 2022 - March 2023, OMRON SINIC X Corporation, Research Internship
+                <a href="https://omron-sinicx.github.io/powder-weighing/" target="_blank">[Project Page]</a>
+                <a href="https://www.researchgate.net/publication/373992199_Learning_Robotic_Powder_Weighing_from_Simulation_for_Laboratory_Automation"
+                    target="_blank">[Paper]</a>
+                <a href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank">[Video]</a>
+            </li>
+            <li>
+                December 2018 - March 2019, Aluminum Factory Corporation, Part-time Job for Making 3D-CAD Models
+            </li>
+        </ol>
+    </section>
+
+    <section id="Research Field">
+        <h2>Research Field</h2>
+        <ul>
+            <li>Reinforcement Learning, Deep Learning, Robotics</li>
+            <li>Sim-to-Real, Domain Randomization</li>
+            <li>Edge Robot, FPGA, Neurochip</li>
+        </ul>
+    </section>
+
+    <div class="center-container">
+        <h2>Gallery</h2>
+    </div>
+
+    <div class="gallery-container">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/JTltnQrI5sg" width="560" height="315" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/UxRnZcLIe3c" width="560" height="315" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/FDM_bT0-RyY" width="560" height="315" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <p><strong>Contact:</strong> kadokawa.yuki.kv3{at}is.naist.jp</p>
+            <p><strong>Address:</strong> 8916-5 Takayama-cho, Ikoma, Nara 630-0192, JAPAN</p>
+            <p><strong>Affiliation:</strong> Nara Institute of Science and Technology, Robot Learning Laboratory</p>
+        </div>
+    </div>
+
+    <div class="icon-container">
+        <div id="emailLink">
+            <div class="contact-container">
+                <i class="fa fa-envelope" style="font-size:50px"></i>
+                <p>E-Mail</p>
+            </div>
+        </div>
+        <div id="LinkButton">
+            <div class="contact-container">
+                <a href="https://scholar.google.com/citations?hl=en&user=7vig4HcAAAAJ" target="_blank">
+                    <img class="icon" width="50" height="50"
+                        src="https://img.icons8.com/ios-filled/50/google-scholar--v2.png" alt="google-scholar" />
+                    <p>Google Scholar</p>
+                </a>
+            </div>
+        </div>
+        <div id="LinkButton">
+            <div class="contact-container">
+                <a href="https://github.com/yuki-kadokawa" target="_blank">
+                    <i class="fa fa-github" style="font-size:50px"></i>
+                    <p>Github</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <script>
+        document.getElementById('emailLink').addEventListener('click', function () {
+            var email = 'kadokawa.yuki.kv3@is.naist.jp';
+            var textarea = document.createElement('textarea');
+            textarea.value = email;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('E-Mail address is copied to clipboard: ' + email);
+        });
+    </script>
+
+    <script>
+        // オートスクロールを実行する関数
+        function autoScrollVideos() {
+            const videosContainer = document.querySelector('.gallery-container');
+
+            // 現在のスクロール位置
+            let scrollPosition = videosContainer.scrollLeft;
+
+            // スクロール速度を調整
+            const scrollSpeed = 0.5;
+            videosContainer.scrollLeft = scrollPosition + scrollSpeed;
+
+            // スクロールが終わったら最初から繰り返す
+            if (videosContainer.scrollLeft >= videosContainer.scrollWidth - videosContainer.clientWidth) {
+                videosContainer.scrollLeft = 0;
+            }
+        }
+
+        // 一定時間ごとにオートスクロールを実行
+        setInterval(autoScrollVideos, 5); // 50ミリ秒ごとにスクロール
+    </script>
+</body>
+
+</html>
