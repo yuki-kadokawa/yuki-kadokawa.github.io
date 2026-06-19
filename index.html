@@ -1,443 +1,1905 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Yuki Kadokawa — Reinforcement Learning &amp; Robotics Researcher</title>
+    <meta name="description"
+        content="Yuki Kadokawa is a researcher in reinforcement learning and robotics, focusing on Sim-to-Real transfer, domain randomization, and edge robots (FPGA / neurochips). Cross-appointed at F-REI and NAIST.">
+    <meta name="author" content="Yuki Kadokawa">
 
-    <title>Yuki kadokawa</title>
+    <!-- Open Graph / social cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Yuki Kadokawa — Reinforcement Learning &amp; Robotics Researcher">
+    <meta property="og:description"
+        content="Researcher in reinforcement learning and robotics: Sim-to-Real, domain randomization, and edge robots.">
+    <meta property="og:url" content="https://yuki-kadokawa.github.io/">
+    <meta property="og:image" content="https://yuki-kadokawa.github.io/selfphoto-web.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Yuki Kadokawa">
+    <meta name="twitter:description"
+        content="Researcher in reinforcement learning and robotics: Sim-to-Real, domain randomization, and edge robots.">
+    <meta name="twitter:image" content="https://yuki-kadokawa.github.io/selfphoto-web.jpg">
+
+    <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Prevent dark-mode flash: apply saved theme before paint -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { }
+        })();
+    </script>
+
     <style>
+        :root {
+            --bg: #f6f7fb;
+            --bg-grad-1: #eef2ff;
+            --bg-grad-2: #f6f7fb;
+            --surface: #ffffff;
+            --surface-2: #f3f5f9;
+            --text: #0f172a;
+            --text-muted: #5b6573;
+            --heading: #0b1220;
+            --accent: #2563eb;
+            --accent-2: #4f46e6;
+            --accent-soft: #e7edff;
+            --accent-on: #ffffff;
+            --border: #e6e9f0;
+            --border-strong: #d3d9e6;
+            --shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 8px 24px rgba(16, 24, 40, .06);
+            --shadow-lg: 0 12px 40px rgba(16, 24, 40, .12);
+            --ring: rgba(37, 99, 235, .35);
+            --badge-bg: #eef2ff;
+            --badge-text: #4338ca;
+            --review-bg: #fff4e5;
+            --review-text: #b45309;
+            --award-bg: #fef3c7;
+            --award-text: #92400e;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --maxw: 940px;
+            --header-h: 64px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0b1120;
+            --bg-grad-1: #111a31;
+            --bg-grad-2: #0b1120;
+            --surface: #131c2f;
+            --surface-2: #1a2438;
+            --text: #e6ebf5;
+            --text-muted: #9aa6bd;
+            --heading: #f3f6fc;
+            --accent: #60a5fa;
+            --accent-2: #818cf8;
+            --accent-soft: #1d2a45;
+            --accent-on: #06101f;
+            --border: #243049;
+            --border-strong: #314062;
+            --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, .5);
+            --ring: rgba(96, 165, 250, .4);
+            --badge-bg: #1d2a45;
+            --badge-text: #a5b4fc;
+            --review-bg: #3a2a12;
+            --review-text: #fbbf24;
+            --award-bg: #3a300f;
+            --award-text: #fcd34d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #c6c4d5, #4a76e6);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        header {
-            text-align: center;
-            padding: 20px;
-            background-color: #f2f2f2;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            top: 0;
-        }
-
-        nav {
-            text-align: center;
-            margin-top: 30px;
-            position: fixed;
-            width: 100%;
-            background-color: #f2f2f2;
-            z-index: 1000;
-            top: 60px;
-        }
-
-        nav a {
-            margin-right: 5px;
-            margin: 7px;
+        a {
+            color: var(--accent);
             text-decoration: none;
-            display: inline-block;
-            padding: 8px 16px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--heading);
+            line-height: 1.25;
+            margin: 0;
+        }
+
+        .ic {
+            width: 1em;
+            height: 1em;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex: none;
+        }
+
+        /* ---------- Header / Nav ---------- */
+        header.site {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-h);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 0 clamp(16px, 4vw, 32px);
+            background: var(--surface);
+            background: color-mix(in srgb, var(--surface) 80%, transparent);
+            backdrop-filter: saturate(180%) blur(12px);
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: var(--heading);
+            font-size: 1.05rem;
+            white-space: nowrap;
+        }
+
+        .brand:hover {
+            text-decoration: none;
+        }
+
+        .brand .dot {
+            color: var(--accent);
+        }
+
+        nav.primary {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            max-width: 100%;
+        }
+
+        nav.primary::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav.primary a {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: .9rem;
+            padding: 7px 11px;
+            border-radius: 8px;
+            white-space: nowrap;
+            transition: color .15s, background .15s;
+        }
+
+        nav.primary a:hover {
+            color: var(--heading);
+            background: var(--surface-2);
+            text-decoration: none;
+        }
+
+        nav.primary a.active {
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .theme-toggle {
+            flex: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: background .15s, border-color .15s, transform .1s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--surface-2);
+            border-color: var(--border-strong);
+        }
+
+        .theme-toggle:active {
+            transform: scale(.94);
+        }
+
+        .theme-toggle .ic {
+            width: 19px;
+            height: 19px;
+        }
+
+        [data-theme="dark"] .theme-toggle .moon,
+        [data-theme="light"] .theme-toggle .sun {
+            display: none;
+        }
+
+        /* ---------- Layout ---------- */
+        main {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 clamp(16px, 4vw, 24px) 80px;
         }
 
         section {
-            max-width: 70%;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #474646;
-            background-color: #ffffff;
-            border-radius: 8px;
+            scroll-margin-top: calc(var(--header-h) + 14px);
+            margin-top: 30px;
         }
 
-        .spacer {
-            height: 280px;
-        }
-
-        .contact-container {
-            text-align: center;
-        }
-
-        .access-container {
-            text-align: center;
-        }
-
-        .contact-info {
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .icon-container {
+        .section-head {
             display: flex;
-            justify-content: space-around;
-            margin-top: 0px;
+            align-items: baseline;
+            gap: 12px;
+            margin: 0 4px 14px;
         }
 
-        #emailLink {
-            display: inline-block;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            padding: 10px;
+        .section-head h2 {
+            font-size: 1.45rem;
+            letter-spacing: -.02em;
+            position: relative;
         }
 
-        #emailLink:hover {
-            background-color: #3855e536;
-            border-radius: 6px;
+        .section-head .count {
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 2px 9px;
+            border-radius: 999px;
         }
 
-        #LinkButton {
-            display: inline-block;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            padding: 10px;
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(20px, 4vw, 30px);
         }
 
-        #LinkButton:hover {
-            background-color: #3855e536;
-            border-radius: 6px;
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: 210px 1fr;
+            gap: clamp(22px, 4vw, 40px);
+            align-items: center;
+            background:
+                radial-gradient(900px 360px at 12% -10%, var(--bg-grad-1), transparent 70%),
+                var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            padding: clamp(24px, 4vw, 40px);
         }
 
-        .photo-frame {
-            border: 0px solid #333;
-            border-radius: 30px;
-            overflow: hidden;
-            display: inline-block;
+        .hero .photo {
+            justify-self: center;
         }
 
-        .photo-frame img {
+        .hero .photo img {
             width: 200px;
-            height: auto;
+            max-width: 46vw;
+            aspect-ratio: 5 / 6;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid var(--surface);
+            outline: 1px solid var(--border);
             display: block;
-            margin: 0 auto;
         }
 
-        .center-container {
-            text-align: center;
+        .hero h1 {
+            font-size: clamp(1.9rem, 5vw, 2.7rem);
+            letter-spacing: -.03em;
+            margin-bottom: 4px;
         }
 
-        .gallery-container {
-            width: 80%;
-            max-width: 800px;
-            margin: 0 auto;
-            overflow-x: scroll;
-            white-space: nowrap;
-            border: 3px solid #333;
-            border-radius: 6px;
-            background-color: #333;
+        .hero .role {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.02rem;
+            margin: 0 0 14px;
         }
 
-        .video-container {
+        .hero .bio {
+            color: var(--text-muted);
+            font-size: 1.01rem;
+            margin: 0 0 12px;
+            max-width: 60ch;
+        }
+
+        .affil-tag {
             display: inline-block;
-            width: 560px;
-            height: 315px;
-            margin-right: 20px;
-            cursor: pointer;
-            /* カーソルをポインタに変更 */
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 3px 11px;
+            border-radius: 999px;
+            margin-bottom: 10px;
         }
 
-        h3 {
-            color: rgb(64, 64, 249);
+        .hero .affil {
+            list-style: none;
+            margin: 0 0 18px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hero .affil li {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            color: var(--text);
+            font-size: .95rem;
+        }
+
+        .hero .affil .ic {
+            width: 17px;
+            height: 17px;
+            color: var(--accent);
+            margin-top: 4px;
+        }
+
+        .socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .socials a, .socials button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .9rem;
+            font-weight: 600;
+            color: var(--text);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 9px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform .12s, border-color .15s, background .15s, color .15s;
+        }
+
+        .socials a:hover, .socials button:hover {
+            text-decoration: none;
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .socials .ic {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ---------- News ---------- */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-item {
+            display: grid;
+            grid-template-columns: 88px 1fr;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .news-item:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-item:first-child {
+            padding-top: 0;
+        }
+
+        .news-date {
+            font-weight: 700;
+            font-size: .82rem;
+            color: var(--accent);
+            background: var(--accent-soft);
+            height: fit-content;
+            padding: 3px 0;
+            border-radius: 8px;
+            text-align: center;
+            letter-spacing: .02em;
+        }
+
+        .news-body {
+            color: var(--text);
+            font-size: .97rem;
+        }
+
+        .news-body .new-tag {
+            display: inline-block;
+            font-size: .65rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            color: var(--accent-on);
+            background: var(--accent);
+            padding: 1px 6px;
+            border-radius: 5px;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
+
+        /* ---------- Publications ---------- */
+        .pub-group + .pub-group {
+            margin-top: 26px;
+        }
+
+        .pub-group > h3 {
+            font-size: 1.05rem;
+            letter-spacing: -.01em;
+            margin: 0 4px 12px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--heading);
+        }
+
+        .pub-group > h3::before {
+            content: "";
+            width: 4px;
+            height: 18px;
+            border-radius: 3px;
+            background: linear-gradient(var(--accent), var(--accent-2));
+        }
+
+        .pub {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 18px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            transition: border-color .15s, box-shadow .15s, transform .12s;
+        }
+
+        .pub + .pub {
+            margin-top: 12px;
+        }
+
+        .pub:hover {
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .pub-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 4px;
+            background: var(--badge-bg);
+            border-radius: 10px;
+            padding: 8px 6px;
+            height: fit-content;
+        }
+
+        .pub-badge .venue {
+            font-weight: 700;
+            font-size: .76rem;
+            color: var(--badge-text);
+            line-height: 1.2;
+        }
+
+        .pub-badge .year {
+            font-size: .72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .pub-badge.review {
+            background: var(--surface-2);
+        }
+
+        .pub-badge.review .venue {
+            color: var(--text-muted);
+        }
+
+        .pub-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .pub-authors {
+            color: var(--text-muted);
+            font-size: .9rem;
+            margin: 0 0 4px;
+        }
+
+        .pub-authors strong {
+            color: var(--text);
+        }
+
+        .pub-venue {
+            font-size: .86rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0 0 10px;
+        }
+
+        .award-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: .76rem;
+            font-weight: 700;
+            font-style: normal;
+            color: var(--award-text);
+            background: var(--award-bg);
+            padding: 2px 8px;
+            border-radius: 999px;
+            margin-left: 6px;
+        }
+
+        .award-tag .ic {
+            width: 13px;
+            height: 13px;
+        }
+
+        .pub-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border: 1px solid transparent;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: background .15s, color .15s, border-color .15s;
+        }
+
+        .btn:hover {
+            text-decoration: none;
+            background: var(--accent);
+            color: var(--accent-on);
+        }
+
+        .btn .ic {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ---------- Publication thumbnails (Fig. 1) ---------- */
+        .pub.haspic {
+            grid-template-columns: 1fr 220px;
+            row-gap: 9px;
+        }
+
+        .pub.haspic .pub-body {
+            grid-column: 1;
+            grid-row: 1 / -1;
+        }
+
+        .pub.haspic .pub-thumb,
+        .pub.haspic .pub-vid {
+            grid-column: 2;
+        }
+
+        .pub-thumb {
+            display: block;
+            align-self: start;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            border-radius: 9px;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .pub-thumb img {
+            width: 100%;
+            height: 124px;
+            object-fit: contain;
+            display: block;
+            transition: transform .25s;
+        }
+
+        .pub-thumb:hover img {
+            transform: scale(1.04);
+        }
+
+        .pub-vid {
+            position: relative;
+            display: block;
+            border: 1px solid var(--border);
+            background: #000;
+            border-radius: 9px;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .pub-vid img {
+            width: 100%;
+            height: 124px;
+            object-fit: cover;
+            display: block;
+            transition: transform .25s;
+        }
+
+        .pub-vid:hover img {
+            transform: scale(1.05);
+        }
+
+        .pub-vid .play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .62);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+
+        .pub-vid:hover .play {
+            background: #e53935;
+        }
+
+        .pub-vid .play::after {
+            content: "";
+            border-style: solid;
+            border-width: 6px 0 6px 11px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 3px;
+        }
+
+        .pub-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 6px;
+        }
+
+        .pub-meta .venue-tag {
+            font-weight: 700;
+            font-size: .72rem;
+            color: var(--badge-text);
+            background: var(--badge-bg);
+            padding: 2px 9px;
+            border-radius: 6px;
+        }
+
+        .pub-meta .venue-tag.review {
+            color: var(--text-muted);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+        }
+
+        .pub-meta .year-tag {
+            font-size: .74rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* ---------- Timeline (education / experience) ---------- */
+        .timeline {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .timeline li {
+            position: relative;
+            padding: 0 0 22px 26px;
+            border-left: 2px solid var(--border);
+        }
+
+        .timeline li:last-child {
+            padding-bottom: 0;
+            border-left-color: transparent;
+        }
+
+        .timeline li::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 3px solid var(--accent);
+        }
+
+        .timeline .t-when {
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .timeline .t-what {
+            font-weight: 600;
+            color: var(--heading);
+        }
+
+        .timeline .t-where {
+            color: var(--text-muted);
+            font-size: .92rem;
+        }
+
+        .timeline .pub-links {
+            margin-top: 8px;
+        }
+
+        /* ---------- Two-column area ---------- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        ol.clean, ul.clean {
+            margin: 0;
+            padding-left: 1.15em;
+        }
+
+        ol.clean li, ul.clean li {
+            margin-bottom: 9px;
+        }
+
+        ol.clean li::marker {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .chip {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: .9rem;
+            font-weight: 500;
+            padding: 7px 13px;
+            border-radius: 999px;
+        }
+
+        /* ---------- Contact ---------- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .contact-grid .row {
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+        }
+
+        .contact-grid .ic {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+            margin-top: 4px;
+        }
+
+        .contact-grid .label {
+            font-size: .76rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        footer.site {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: .85rem;
+            padding: 28px 16px 10px;
+        }
+
+        /* ---------- Toast ---------- */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            transform: translate(-50%, 20px);
+            background: var(--heading);
+            color: var(--bg);
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-size: .9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s, transform .2s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 760px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 18px;
+            }
+
+            .hero .bio {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero .affil li {
+                justify-content: center;
+                text-align: left;
+            }
+
+            .socials {
+                justify-content: center;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .brand {
+                font-size: .98rem;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .pub {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .pub.haspic {
+                grid-template-columns: 1fr;
+            }
+
+            .pub.haspic .pub-body,
+            .pub.haspic .pub-thumb,
+            .pub.haspic .pub-vid {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .pub-thumb img {
+                height: 180px;
+            }
+
+            .pub-vid img {
+                height: 200px;
+            }
+
+            .pub-badge {
+                flex-direction: row;
+                gap: 8px;
+                justify-content: flex-start;
+                padding: 6px 12px;
+            }
+
+            .news-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .news-date {
+                width: fit-content;
+                padding: 2px 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Yuki Kadokawa</h1>
+    <!-- ===== Icon sprite ===== -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-paper" viewBox="0 0 24 24">
+            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+            <path d="M14 3v5h5M9 13h6M9 17h6" />
+        </symbol>
+        <symbol id="i-video" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="14" height="14" rx="2" />
+            <path d="M21 7l-4 3 4 3z" />
+        </symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z" />
+        </symbol>
+        <symbol id="i-link" viewBox="0 0 24 24">
+            <path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1" />
+            <path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" />
+        </symbol>
+        <symbol id="i-news" viewBox="0 0 24 24">
+            <path d="M4 5h13v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" />
+            <path d="M17 8h2a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2M7 9h7M7 13h7M7 17h4" />
+        </symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" />
+        </symbol>
+        <symbol id="i-github" viewBox="0 0 24 24">
+            <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.6a5.1 5.1 0 0 0-1.4-3.5 4.8 4.8 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6.3 0C6.8.6 5.7.9 5.7.9a4.8 4.8 0 0 0-.1 3.5A5.1 5.1 0 0 0 4.2 8c0 5 3 6.3 6 6.6a3.4 3.4 0 0 0-1 2.6V21" />
+        </symbol>
+        <symbol id="i-scholar" viewBox="0 0 24 24">
+            <path d="M12 3 1 9l11 6 9-4.9V17" stroke-linejoin="round" />
+            <path d="M6 12.5V17c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5" />
+        </symbol>
+        <symbol id="i-award" viewBox="0 0 24 24">
+            <circle cx="12" cy="9" r="6" />
+            <path d="M8.2 13.5 7 22l5-3 5 3-1.2-8.5" />
+        </symbol>
+        <symbol id="i-cap" viewBox="0 0 24 24">
+            <path d="M22 9 12 5 2 9l10 4 10-4z" />
+            <path d="M6 11v5c0 1.3 2.7 3 6 3s6-1.7 6-3v-5" />
+        </symbol>
+        <symbol id="i-briefcase" viewBox="0 0 24 24">
+            <rect x="3" y="7" width="18" height="13" rx="2" />
+            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18" />
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24">
+            <path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z" />
+            <circle cx="12" cy="10" r="2.5" />
+        </symbol>
+        <symbol id="i-gift" viewBox="0 0 24 24">
+            <rect x="3" y="8" width="18" height="13" rx="1" />
+            <path d="M3 12h18M12 8v13M12 8S10 3 7.5 4.5 9.5 8 12 8zM12 8s2-5 4.5-3.5S14.5 8 12 8z" />
+        </symbol>
+        <symbol id="i-flask" viewBox="0 0 24 24">
+            <path d="M9 3h6M10 3v6l-5 9a1 1 0 0 0 .9 1.5h12.2A1 1 0 0 0 19 18l-5-9V3" />
+            <path d="M7.5 14h9" />
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4.5" />
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+        </symbol>
+        <symbol id="i-mic" viewBox="0 0 24 24">
+            <rect x="9" y="3" width="6" height="11" rx="3" />
+            <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" />
+        </symbol>
+    </svg>
+
+    <header class="site">
+        <a href="#top" class="brand">Yuki Kadokawa<span class="dot">.</span></a>
+        <nav class="primary" aria-label="Primary">
+            <a href="#about">About</a>
+            <a href="#news">News</a>
+            <a href="#publications">Publications</a>
+            <a href="#honors">Honors</a>
+            <a href="#experience">Experience</a>
+            <a href="#research">Research</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+            <svg class="ic sun"><use href="#i-sun" /></svg>
+            <svg class="ic moon"><use href="#i-moon" /></svg>
+        </button>
     </header>
 
-    <nav>
-        <a href="#Current Position">Current Position</a>
-        <a href="#Education">Education</a>
-        <a href="#Publication">Publication</a>
-        <a href="#Award">Award</a>
-        <a href="#Scholarship & Grant">Scholarship & Grant</a>
-        <a href="#Work history">Work history</a>
-        <a href="#Research Field">Research Field</a>
-    </nav>
+    <main>
+        <span id="top"></span>
 
-    <div class="spacer"></div>
-
-    <div class="center-container">
-        <div class="photo-frame">
-            <img src="./selfphoto.png" alt="self photo">
-        </div>
-    </div>
-
-    <section id="Current Position">
-        <h2>Current Position</h2>
-        <p>Cross Appointment:</p>
-        <p>Fukushima Institute for Research, Education and Innovation (F-REI): Researcher</p>
-        <p>Nara Institute of Science and Technology (NAIST): Project Assistant Professor</p>
-    </section>
-
-    <section id="Education">
-        <h2>Education</h2>
-        <ul>
-            <li>Doctor of Engineering, Nara Institute of Science and Technology, Program of Information Science and
-                Engineering, Japan, 2024</li>
-            <li>Master of Engineering, Nara Institute of Science and Technology, Program of Information Science and
-                Engineering, Japan, 2021</li>
-            <li>Bachelor of Engineering, Toyama Prefectural University, Department of Intelligent Robotics, Japan, 2019
-            </li>
-        </ul>
-    </section>
-
-    <section id="Publication">
-        <h2>Publication</h2>
-        <h3>International Journal</h3>
-        <ol>
-            <li><strong>Yuki Kadokawa</strong>, Tomoya Yamanokuchi, Alonso Ramos Fernandez, Takanori Homma, and Takamitsu Matsubara, "Distilled Iterative Value Conversion: Reducing FPNN-to-SNN Conversion Errors via Distillation in Reinforcement Learning for Neurochip-Driven Edge Robots", IEEE Access, 2026
-                <a href="https://ieeexplore.ieee.org/document/11372693" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/YhPj9DbC3wI" target="_blank">[Video]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Jonas Frey, Takahiro Miki, Takamitsu Matsubara, and Marco Hutter, "DAPPER: Discriminability-Aware Policy-to-Policy Preference-Based Reinforcement Learning for Query-Efficient Robot Skill Acquisition", IEEE Robotics & Automation Magazine (RAM), 2026
-                <a href="https://arxiv.org/abs/2505.06357" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/lRwX8FNN8n4" target="_blank">[Video]</a>
-            </li>
-            <li>Po-Yen Wu, Cheng-Yu Kuo, <strong>Yuki Kadokawa</strong>, and Takamitsu Matsubara, "Prolonging Tool Life: Learning Skillful Use of General-purpose Tools through Lifespan-guided Reinforcement Learning", IEEE Access, 2026
-                <a href="https://ieeexplore.ieee.org/document/11396648" target="_blank">[Paper]</a>
-                <a href="https://sites.google.com/view/lifespan-guided-rl/" target="_blank">[Project Page]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Hirotaka Tahara, and Takamitsu Matsubara, "Progressive-Resolution Policy Distillation: Leveraging Coarse-Resolution Simulations for Time-Efficient Fine-Resolution Policy Learning", IEEE Transactions on Automation Science and Engineering (T-ASE), 2025
-                <a href="https://yuki-kadokawa.github.io/prpd/" target="_blank">[Project Page]</a>
-                <a href="https://ieeexplore.ieee.org/abstract/document/11083583" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/XnPlK3WNYVQ?si=1SgpvxEI-4j1LzKm" target="_blank">[Video]</a>
-                <a href="https://www.nikkan.co.jp/articles/view/00752027" target="_blank">[Newspaper Article]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Tomohito Kodera, Yoshihisa Tsurumine, Shinya
-                Nishimura, and Takamitsu Matsubara, "Robust Iterative Value Conversion: Deep Reinforcement Learning for
-                Neurochip-driven Edge Robots", Robotics and Autonomous Systems (RAS), 2024
-                <a href="https://arxiv.org/pdf/2408.13018" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/Q5Z0-BvK1Tc?feature=shared" target="_blank">[Video]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Lingwei Zhu, Yoshihisa Tsurumine, and Takamitsu Matsubara, "Cyclic Policy
-                Distillation:
-                Sample-Efficient Sim-to-Real Reinforcement Learning with Domain Randomization", Robotics and Autonomous
-                Systems (RAS), 2023
-                <a href="https://arxiv.org/pdf/2207.14561" target="_blank">[Paper]</a>
-                <a href="https://www.youtube.com/watch?v=UxRnZcLIe3c&t=1s" target="_blank">[Video]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara, "Binarized P-Network: Deep
-                Reinforcement Learning of Robot Control from Raw Images on FPGA", IEEE Robotics and Automation Letters
-                (RA-L), vol. 6,
-                no. 4, pp. 8545-8552, 2021 <strong>(Student Paper Award)</strong>
-                <a href="https://arxiv.org/pdf/2109.04966" target="_blank">[Paper]</a>
-                <a href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank">[Video]</a>
-            </li>
-            <li>Issa Nakamura, Tomoya Yamanokuchi, <strong>Yuki Kadokawa</strong>, Jia Qu, Shun Otsubo, Shotaro Miwa, and Takamitsu Matsubara, 
-                "ViSA: Visited-State Augmentation for Generalized Goal-Space Contrastive Reinforcement Learning", under review
-                <a href="https://arxiv.org/abs/2603.14887" target="_blank">[Paper]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Sandro M. Alcantara Tacora, Taro Abe, Daisuke Endo, Genki Yamauchi, Takeshi Hashimoto, and Takamitsu Matsubara, 
-                "Autonomous Obstacle Removal for Excavators through Policy Learning with Particle Simulation", under review
-                <a href="https://arxiv.org/pdf/2606.09183" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/PycVGYh-cYs" target="_blank">[Video]</a>
-            </li>
-            <li>Gahee Kim, <strong>Yuki Kadokawa</strong>, Sandro M. Alcantara Tacora, Taro Abe, Daisuke Endo, Genki Yamauchi, Takeshi Hashimoto, and Takamitsu Matsubara, 
-                "Bridged SBI: Correcting Biased Low-Fidelity Posteriors for Cost-Efficient High-Fidelity Inference", under review
-                <a href="https://arxiv.org/abs/2606.09155" target="_blank">[Paper]</a>
-            </li>
-        </ol>
-
-        <h3>International Conference</h3>
-        <ol>
-            <li><strong>Yuki Kadokawa</strong>, Jonas Frey, Takahiro Miki, Takamitsu Matsubara, and Marco Hutter, "DAPPER: Discriminability-Aware Policy-to-Policy Preference-Based Reinforcement Learning for Query-Efficient Robot Skill Acquisition", IEEE International Conference on Robotics and Automation (ICRA, RAM option), 2026
-                <a href="https://arxiv.org/abs/2505.06357" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/lRwX8FNN8n4" target="_blank">[Video]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Hirotaka Tahara, and Takamitsu Matsubara, "Progressive-Resolution Policy Distillation: Leveraging Coarse-Resolution Simulations for Time-Efficient Fine-Resolution Policy Learning", IEEE International Conference on Robotics and Automation (ICRA, T-ASE option), 2026
-                <a href="https://yuki-kadokawa.github.io/prpd/" target="_blank">[Project Page]</a>
-                <a href="https://ieeexplore.ieee.org/abstract/document/11083583" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/XnPlK3WNYVQ?si=1SgpvxEI-4j1LzKm" target="_blank">[Video]</a>
-                <a href="https://www.nikkan.co.jp/articles/view/00752027" target="_blank">[Newspaper Article]</a>
-            </li>
-            <li>Yoshihisa Tsurumine, <strong>Yuki Kadokawa</strong>, Kohei Hayashi, Christian Diehm, and Takamitsu Matsubara, "Robust Sim-to-Real Cloth Untangling through Reduced-Resolution Observations via Adaptive Force-Difference Quantization", IEEE International Conference on Automation Science and Engineering (CASE), 2026
-                <a href="https://arxiv.org/pdf/2603.13785" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/ZeoBs-t0AWc" target="_blank">[Video]</a>
-            </li>
-            <li>Ryo Watanabe, Takahiro Miki, Fan Shi, <strong>Yuki Kadokawa</strong>, Filip Bjelonic, Kento Kawaharazuka, Andrei Cramariuc, and Marco Hutter, "Learning Quiet Walking for a Small Home Robot", International Conference on Robotics and Automation (ICRA), 2025
-                <a href="https://sony.github.io/QuietWalk/" target="_blank">[Project Page]</a>
-                <a href="https://arxiv.org/pdf/2502.10983" target="_blank">[Paper]</a>
-                <a href="https://www.youtube.com/watch?v=6RjkBHSYEcc" target="_blank">[Video]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, and Takamitsu Matsubara, "Scalable Domain Randomized Reinforcement Learning for Sim-to-Real Policy Transfer in Complex Robot Tasks",  International Symposium on Artificial Life and Robotics (AROB), 2025
-                <a href="https://isarob.org/symposium/index.php?main_page=timetable" target="_blank">[Conference URL]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Masashi Hamaya, and Kazutoshi Tanaka, "Learning Robotic Powder Weighing
-                from Simulation for Laboratory Automation", IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2023
-                <a href="https://omron-sinicx.github.io/powder-weighing/" target="_blank">[Project Page]</a>
-                <a href="https://www.researchgate.net/publication/373992199_Learning_Robotic_Powder_Weighing_from_Simulation_for_Laboratory_Automation"
-                    target="_blank">[Paper]</a>
-                <a href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank">[Video]</a>
-            </li>
-            <li><strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara, "Binarized P-Network:
-                Deep Reinforcement Learning of Robot Control from Raw Images on FPGA", IEEE International Conference on Robotics and Automation (ICRA, RA-L option), 2023
-                <a href="https://arxiv.org/pdf/2109.04966" target="_blank">[Paper]</a>
-                <a href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank">[Video]</a>
-            </li>
-            <li>Kazuki Shibata, Ryosuke Sota, Shandil Dhiresh Bosch, <strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara, "DeReCo: Decoupling Representation and Coordination Learning for Object-Adaptive Decentralized Multi-Robot Cooperative Transport", under review
-                <a href="https://arxiv.org/pdf/2603.08111" target="_blank">[Paper]</a>
-                <a href="https://youtu.be/V5CYCjXRUb8?si=OytW0Z9La5P8OuIm" target="_blank">[Video]</a>
-            </li>
-        </ol>
-        <h3>Domestic Conference</h3>
-        <ol>
-            <li>金加喜, <strong>角川勇貴</strong>, Sandro Manuel Alcantara Tacora, 阿部太郎, 遠藤大輔, 山内元貴, 橋本毅, 松原崇充, "段階的解像度シミュレーションを用いた土砂の挙動を再現する粒子パラメータ自動推定", 計測自動制御学会システムインテグレーション部門講演会, 2025
-                <a href="https://sice-si.org/si2025/programs.php" target="_blank">[Conference URL]</a>
-            </li>
-            <li><strong>角川勇貴</strong>, Sandro Manuel Alcantara Tacora, 松原崇充, "ドメインランダム化強化学習による油圧ショベルの土砂中の障害物除去タスク実現", 日本ロボット学会学術講演会, 2025
-                <a href="https://ac.rsj-web.org/2025/program.html" target="_blank">[Conference URL]</a>
-            </li>
-            <li>中村維冴, 山之口智也, <strong>角川勇貴</strong>, 曲佳, 大坪舜, 宮本健, 三輪祥太郎, 松原崇充,  "到達状態拡張による対照強化学習の汎化", 日本ロボット学会学術講演会, 2025
-                <a href="https://ac.rsj-web.org/2025/program.html" target="_blank">[Conference URL]</a>
-            <li>曽田涼介, 柴田一騎, 鶴峯義久, <strong>角川勇貴</strong>, 松原崇充,  "柔軟な群ロボット協調輸送のための非対称アクター・クリティック型マルチエージェント強化学習", 日本ロボット学会学術講演会, 2025
-                <a href="https://ac.rsj-web.org/2025/program.html" target="_blank">[Conference URL]</a>
-            <li>Alonso Ramos Fernandez, <strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara, "Deep Reinforcement Learning with FPNN-toSNN Policy Distillation for Neurochip-driven Robots", Annual Conference of the Robotics Society of Japan, 2024 <strong>(Best Presentation Award Finalist)</strong>
-                <a href="https://ac.rsj-web.org/2024/program.html" target="_blank">[Conference URL]</a>
-            </li>
-            <li>中村維冴, 山之口智也, <strong>角川勇貴</strong>, 曲佳, 大坪舜, 三輪祥太郎, 松原崇充,  "Sim-to-Real 方策転移のためのダイナミクスランダム化対照強化学習", ロボティクス・メカトロニクス講演会, 2024
-                <a href="https://robomech.org/2024/" target="_blank">[Conference URL]</a>
-            <li>小寺智仁, <strong>角川勇貴</strong>, 鶴峯義久, 松原崇充, "ニューロチップ実装に適した量子化方策のエッジサーバー深層強化学習", 計測自動制御学会制御部門マルチシンポジウム, 2023
-                <a href="https://mscs2023.sice-ctrl.jp/" target="_blank">[Conference URL]</a>
-            </li>
-            <li><strong>角川勇貴</strong>, 鶴峯義久, 松原崇充, "FPGAを用いた実時間ロボット制御のための深層強化学習手法 Binary P-Network の提案", 日本ロボット学会学術講演会, 2020
-                <a href="https://ac.rsj-web.org/2020/program.html" target="_blank">[Conference URL]</a>
-            </li>
-        </ol>
-        <h3>Invited Talk</h3>
-        <ol>
-            <li><strong>角川勇貴</strong>, 松原崇充, "実世界ロボットタスクにおけるSim-to-Real強化学習: パーティクルシミュレーションにおける計算量と精度のトレードオフ", 計測自動制御学会 自律分散システム・シンポジウム, 2026
-                <a href="https://sites.google.com/sice-das.org/das38th" target="_blank">[Conference URL]</a>
-            </li>
-        </ol>
-    </section>
-
-    <section id="Award">
-        <h2>Award</h2>
-        <ol>
-            <li>Nara Institute of Science and Technology, Symposium of University Fellowship, Outstanding
-                Student Award, 2022 <a href="http://isw3.naist.jp/IS/PubWG/Events-ja/award20221007_kadokawa.html"
-                    target="_blank">[Award
-                    Page]</a> </li>
-            <li>IEEE Kansai Section, Student Paper Award, 2022 Student Award, 2022 <a
-                    href="http://isw3.naist.jp/IS/PubWG/Events-ja/award20220222_kadokawa.html" target="_blank">[NAIST
-                    Award
-                    Page]</a> <a href="https://www.ieee-jp.org/section/kansai/award/studentlist.html"
-                    target="_blank">[IEEE Award Page]</a> </li>
-            </li>
-            <li>Toyama Prefectural University, Best Student of the Year, 2019</li>
-            <li>Toyama Mechanical and Electrical Industries Association, Monozukuri in Toyama, Grand Prize, 2018</li>
-            <li>Japan Society for Design Engineering, Design Competition, Best Presentation Award, 2018 </li>
-            <li>Japan Society for Design Engineering, Design Competition, 3rd Place (National Finals 3/10), 2018</li>
-            <li>Japan Society for Design Engineering, Research Presentation, Best Student Presentation Award, 2018</li>
-            <li>Japan Society for Design Engineering, Design Competition, Best Presentation Award, 2017 </li>
-            <li>Toyama Prefectural Takaoka Kogei High School, Best Student of the Year, 2015</li>
-        </ol>
-    </section>
-
-    <section id="Scholarship & Grant">
-        <h2>Scholarship & Grant</h2>
-        <ol>
-            <li>Nara Institute of Science and Technology, Senju Monju Project (Obtaining Research Grant), 2024-2026</li>
-            <li>Japan Student Services Organization, Scholarship (Return Exemption Full Amount), 2023</li>
-            <li>Japan Society for the Promotion of Science, Research Fellowship for Young Scientists: DC2 (Obtaining
-                Research
-                Funding and Salaries), 2023-2025</li>
-            <li>Japan Science and Technology Agency, Research Fellowship (Obtaining Research Grant and Salaries), 2022-2023
-                <a href="http://isw3.naist.jp/IS/is-fellowship/pr/interview/2022/kadokawa/index.html"
-                    target="_blank">[Interview
-                    Page]</a>
-            </li>
-            <li>Japan Student Services Organization, Scholarship (Return Exemption Half Amount), 2021</li>
-            <li>Nara Institute of Science and Technology, Outstanding Student Scholarship (Tuition Exemption), 2021</li>
-        </ol>
-    </section>
-
-    <section id="Work history">
-        <h2>Work history</h2>
-        <ol>
-            <li>
-                April 2024 - March 2026, Robot Learning Lab (Nara Institute of Science and Technology), Project Assistant Professor
-            </li>
-            <li>
-                August 2023 - October 2023, Robotics Systems Lab (ETH Zurich), Visiting Researcher
-            </li>
-            <li>
-                April 2022 - March 2023, OMRON SINIC X Corporation, Research Internship
-                <a href="https://omron-sinicx.github.io/powder-weighing/" target="_blank">[Project Page]</a>
-                <a href="https://www.researchgate.net/publication/373992199_Learning_Robotic_Powder_Weighing_from_Simulation_for_Laboratory_Automation"
-                    target="_blank">[Paper]</a>
-                <a href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank">[Video]</a>
-            </li>
-            <li>
-                December 2018 - March 2019, Aluminum Factory Corporation, Part-time Job for Making 3D-CAD Models
-            </li>
-        </ol>
-    </section>
-
-    <section id="Research Field">
-        <h2>Research Field</h2>
-        <ul>
-            <li>Reinforcement Learning, Deep Learning, Robotics</li>
-            <li>Sim-to-Real, Domain Randomization</li>
-            <li>Edge Robot, FPGA, Neurochip</li>
-        </ul>
-    </section>
-
-    <div class="contact-container">
-        <div class="contact-info">
-            <p><strong>Contact:</strong> kadokawa.yuki{at}naist.ac.jp</p>
-            <p><strong>Address:</strong> 8916-5 Takayama-cho, Ikoma, Nara 630-0192, JAPAN</p>
-            <p><strong>Affiliation:</strong> Nara Institute of Science and Technology, Robot Learning Laboratory</p>
-        </div>
-    </div>
-
-    <div class="icon-container">
-        <div id="emailLink">
-            <div class="contact-container">
-                <i class="fa fa-envelope" style="font-size:50px"></i>
-                <p>E-Mail</p>
+        <!-- ===== Hero / About ===== -->
+        <section class="hero" id="about">
+            <div class="photo">
+                <img src="./selfphoto-web.jpg" alt="Portrait of Yuki Kadokawa" width="200" loading="eager">
             </div>
-        </div>
-        <div id="LinkButton">
-            <div class="contact-container">
-                <a href="https://scholar.google.com/citations?hl=en&user=7vig4HcAAAAJ" target="_blank">
-                    <img class="icon" width="50" height="50"
-                        src="https://img.icons8.com/ios-filled/50/google-scholar--v2.png" alt="google-scholar" />
-                    <p>Google Scholar</p>
-                </a>
+            <div class="intro">
+                <h1>Yuki Kadokawa</h1>
+                <p class="role">Sim-to-Real Reinforcement Learning for Robotics</p>
+                <p class="bio">
+                    I am a researcher in reinforcement learning (RL), deep learning, and robotics. My research
+                    focuses on Sim-to-Real transfer — how robots can learn in simulation and operate in the real
+                    world — using methods such as domain randomization, policy distillation, and sample-efficient
+                    reinforcement learning. I have worked on real-world robotic tasks including manipulation,
+                    legged locomotion, multi-robot systems, and field and industrial robotics.
+                </p>
+                <div class="affil-tag">Cross-appointment</div>
+                <ul class="affil">
+                    <li><svg class="ic"><use href="#i-pin" /></svg>
+                        <span><strong>Researcher</strong>, Fukushima Institute for Research, Education and Innovation
+                            (F-REI)</span>
+                    </li>
+                    <li><svg class="ic"><use href="#i-pin" /></svg>
+                        <span><strong>Project Assistant Professor</strong>, Nara Institute of Science and Technology
+                            (NAIST) — Robot Learning Lab</span>
+                    </li>
+                </ul>
+                <div class="socials">
+                    <button id="emailBtn" type="button" title="Copy e-mail address">
+                        <svg class="ic"><use href="#i-mail" /></svg> E-mail
+                    </button>
+                    <a href="https://scholar.google.com/citations?hl=en&user=7vig4HcAAAAJ" target="_blank"
+                        rel="noopener">
+                        <svg class="ic"><use href="#i-scholar" /></svg> Google Scholar
+                    </a>
+                    <a href="https://github.com/yuki-kadokawa" target="_blank" rel="noopener">
+                        <svg class="ic"><use href="#i-github" /></svg> GitHub
+                    </a>
+                </div>
             </div>
-        </div>
-        <div id="LinkButton">
-            <div class="contact-container">
-                <a href="https://github.com/yuki-kadokawa" target="_blank">
-                    <i class="fa fa-github" style="font-size:50px"></i>
-                    <p>Github</p>
-                </a>
-            </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="spacer"></div>
+        <!-- ===== News =====
+             To add an item, copy a .news-item block and put the newest at the top. -->
+        <section id="news">
+            <div class="section-head">
+                <h2>News &amp; Highlights</h2>
+            </div>
+            <div class="card">
+                <div class="news-list">
+                    <div class="news-item">
+                        <div class="news-date">2026</div>
+                        <div class="news-body"><span class="new-tag">NEW</span>Gave an invited talk at the SICE Symposium
+                            on Decentralized Autonomous Systems (自律分散システム・シンポジウム) on Sim-to-Real RL for real-world
+                            robot tasks.</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2026</div>
+                        <div class="news-body"><strong>DAPPER</strong> was accepted to IEEE Robotics &amp; Automation
+                            Magazine (RAM) and presented at ICRA 2026 — joint work with ETH Zürich.</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2026</div>
+                        <div class="news-body">Our paper on <strong>Distilled Iterative Value Conversion</strong> for
+                            neurochip-driven edge robots was published in IEEE Access.</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025</div>
+                        <div class="news-body"><strong>Progressive-Resolution Policy Distillation (PRPD)</strong> was
+                            published in IEEE T-ASE and featured in the Nikkan Kogyo Shimbun.</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2025</div>
+                        <div class="news-body"><strong>Learning Quiet Walking for a Small Home Robot</strong> was
+                            presented at ICRA 2025 — collaboration with ETH Zürich and Sony.</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">2024</div>
+                        <div class="news-body">Completed my Doctor of Engineering at NAIST and began as a Project
+                            Assistant Professor in the Robot Learning Lab.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Publications ===== -->
+        <section id="publications">
+            <div class="section-head">
+                <h2>Publications</h2>
+                <span class="count">27</span>
+            </div>
+            <div class="card">
+
+                <div class="pub-group">
+                    <h3>International Journal</h3>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://ieeexplore.ieee.org/document/11372693" target="_blank" rel="noopener"><img src="figs/divc.jpg" alt="Figure 1 of Distilled Iterative Value Conversion" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/YhPj9DbC3wI" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/YhPj9DbC3wI/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">IEEE Access</span><span class="year-tag">2026</span></div>
+                            <div class="pub-title">Distilled Iterative Value Conversion: Reducing FPNN-to-SNN Conversion
+                                Errors via Distillation in Reinforcement Learning for Neurochip-Driven Edge Robots</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Tomoya Yamanokuchi, Alonso Ramos
+                                Fernandez, Takanori Homma, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">IEEE Access, 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ieeexplore.ieee.org/document/11372693" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/YhPj9DbC3wI" target="_blank" rel="noopener"><svg
+                                        class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/abs/2505.06357" target="_blank" rel="noopener"><img src="figs/dapper.jpg" alt="Figure 1 of DAPPER" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/lRwX8FNN8n4" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/lRwX8FNN8n4/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">IEEE RAM</span><span class="year-tag">2026</span></div>
+                            <div class="pub-title">DAPPER: Discriminability-Aware Policy-to-Policy Preference-Based
+                                Reinforcement Learning for Query-Efficient Robot Skill Acquisition</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Jonas Frey, Takahiro Miki, Takamitsu
+                                Matsubara, and Marco Hutter</p>
+                            <p class="pub-venue">IEEE Robotics &amp; Automation Magazine (RAM), 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/abs/2505.06357" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/lRwX8FNN8n4" target="_blank" rel="noopener"><svg
+                                        class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://sites.google.com/view/lifespan-guided-rl/" target="_blank" rel="noopener"><img src="figs/tool-life.jpg" alt="Figure 1 of Prolonging Tool Life" loading="lazy"></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">IEEE Access</span><span class="year-tag">2026</span></div>
+                            <div class="pub-title">Prolonging Tool Life: Learning Skillful Use of General-purpose Tools
+                                through Lifespan-guided Reinforcement Learning</div>
+                            <p class="pub-authors">Po-Yen Wu, Cheng-Yu Kuo, <strong>Yuki Kadokawa</strong>, and Takamitsu
+                                Matsubara</p>
+                            <p class="pub-venue">IEEE Access, 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ieeexplore.ieee.org/document/11396648" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://sites.google.com/view/lifespan-guided-rl/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-globe" /></svg>Project Page</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://yuki-kadokawa.github.io/prpd/" target="_blank" rel="noopener"><img src="figs/prpd.jpg" alt="Figure 1 of Progressive-Resolution Policy Distillation" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/XnPlK3WNYVQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/XnPlK3WNYVQ/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">IEEE T-ASE</span><span class="year-tag">2025</span></div>
+                            <div class="pub-title">Progressive-Resolution Policy Distillation: Leveraging
+                                Coarse-Resolution Simulations for Time-Efficient Fine-Resolution Policy Learning</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Hirotaka Tahara, and Takamitsu
+                                Matsubara</p>
+                            <p class="pub-venue">IEEE Transactions on Automation Science and Engineering (T-ASE), 2025
+                            </p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ieeexplore.ieee.org/abstract/document/11083583"
+                                    target="_blank" rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://yuki-kadokawa.github.io/prpd/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-globe" /></svg>Project Page</a>
+                                <a class="btn" href="https://youtu.be/XnPlK3WNYVQ?si=1SgpvxEI-4j1LzKm" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                                <a class="btn" href="https://www.nikkan.co.jp/articles/view/00752027" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-news" /></svg>Newspaper</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/pdf/2408.13018" target="_blank" rel="noopener"><img src="figs/rivc.jpg" alt="Figure 1 of Robust Iterative Value Conversion" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/Q5Z0-BvK1Tc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Q5Z0-BvK1Tc/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">RAS</span><span class="year-tag">2024</span></div>
+                            <div class="pub-title">Robust Iterative Value Conversion: Deep Reinforcement Learning for
+                                Neurochip-driven Edge Robots</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Tomohito Kodera, Yoshihisa Tsurumine,
+                                Shinya Nishimura, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">Robotics and Autonomous Systems (RAS), 2024</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2408.13018" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/Q5Z0-BvK1Tc?feature=shared" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/pdf/2207.14561" target="_blank" rel="noopener"><img src="figs/cpd.jpg" alt="Figure 1 of Cyclic Policy Distillation" loading="lazy"></a>
+                        <a class="pub-vid" href="https://www.youtube.com/watch?v=UxRnZcLIe3c" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/UxRnZcLIe3c/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">RAS</span><span class="year-tag">2023</span></div>
+                            <div class="pub-title">Cyclic Policy Distillation: Sample-Efficient Sim-to-Real Reinforcement
+                                Learning with Domain Randomization</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Lingwei Zhu, Yoshihisa Tsurumine, and
+                                Takamitsu Matsubara</p>
+                            <p class="pub-venue">Robotics and Autonomous Systems (RAS), 2023</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2207.14561" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://www.youtube.com/watch?v=UxRnZcLIe3c&t=1s" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/pdf/2109.04966" target="_blank" rel="noopener"><img src="figs/bpn.jpg" alt="Figure 1 of Binarized P-Network" loading="lazy"></a>
+                        <a class="pub-vid" href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/FDM_bT0-RyY/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">IEEE RA-L</span><span class="year-tag">2021</span></div>
+                            <div class="pub-title">Binarized P-Network: Deep Reinforcement Learning of Robot Control from
+                                Raw Images on FPGA<span class="award-tag"><svg class="ic"><use href="#i-award" /></svg>Student
+                                    Paper Award</span></div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu
+                                Matsubara</p>
+                            <p class="pub-venue">IEEE Robotics and Automation Letters (RA-L), vol. 6, no. 4, pp.
+                                8545–8552, 2021</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2109.04966" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/abs/2603.14887" target="_blank" rel="noopener"><img src="figs/visa.jpg" alt="Figure 1 of ViSA" loading="lazy"></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag review">Under Review</span></div>
+                            <div class="pub-title">ViSA: Visited-State Augmentation for Generalized Goal-Space Contrastive
+                                Reinforcement Learning</div>
+                            <p class="pub-authors">Issa Nakamura, Tomoya Yamanokuchi, <strong>Yuki Kadokawa</strong>, Jia
+                                Qu, Shun Otsubo, Shotaro Miwa, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">Under review</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/abs/2603.14887" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/pdf/2606.09183" target="_blank" rel="noopener"><img src="figs/excavator.jpg" alt="Figure 1 of Autonomous Obstacle Removal for Excavators" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/PycVGYh-cYs" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/PycVGYh-cYs/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag review">Under Review</span></div>
+                            <div class="pub-title">Autonomous Obstacle Removal for Excavators through Policy Learning with
+                                Particle Simulation</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Sandro M. Alcantara Tacora, Taro Abe,
+                                Daisuke Endo, Genki Yamauchi, Takeshi Hashimoto, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">Under review</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2606.09183" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/PycVGYh-cYs" target="_blank" rel="noopener"><svg
+                                        class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/abs/2606.09155" target="_blank" rel="noopener"><img src="figs/bridged-sbi.jpg" alt="Figure 1 of Bridged SBI" loading="lazy"></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag review">Under Review</span></div>
+                            <div class="pub-title">Bridged SBI: Correcting Biased Low-Fidelity Posteriors for
+                                Cost-Efficient High-Fidelity Inference</div>
+                            <p class="pub-authors">Gahee Kim, <strong>Yuki Kadokawa</strong>, Sandro M. Alcantara Tacora,
+                                Taro Abe, Daisuke Endo, Genki Yamauchi, Takeshi Hashimoto, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">Under review</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/abs/2606.09155" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pub-group">
+                    <h3>International Conference</h3>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">ICRA</span><span class="year">2026</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">DAPPER: Discriminability-Aware Policy-to-Policy Preference-Based
+                                Reinforcement Learning for Query-Efficient Robot Skill Acquisition</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Jonas Frey, Takahiro Miki, Takamitsu
+                                Matsubara, and Marco Hutter</p>
+                            <p class="pub-venue">IEEE International Conference on Robotics and Automation (ICRA, RAM
+                                option), 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/abs/2505.06357" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/lRwX8FNN8n4" target="_blank" rel="noopener"><svg
+                                        class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">ICRA</span><span class="year">2026</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">Progressive-Resolution Policy Distillation: Leveraging
+                                Coarse-Resolution Simulations for Time-Efficient Fine-Resolution Policy Learning</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Hirotaka Tahara, and Takamitsu
+                                Matsubara</p>
+                            <p class="pub-venue">IEEE International Conference on Robotics and Automation (ICRA, T-ASE
+                                option), 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ieeexplore.ieee.org/abstract/document/11083583"
+                                    target="_blank" rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://yuki-kadokawa.github.io/prpd/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-globe" /></svg>Project Page</a>
+                                <a class="btn" href="https://youtu.be/XnPlK3WNYVQ?si=1SgpvxEI-4j1LzKm" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                                <a class="btn" href="https://www.nikkan.co.jp/articles/view/00752027" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-news" /></svg>Newspaper</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/pdf/2603.13785" target="_blank" rel="noopener"><img src="figs/cloth.jpg" alt="Figure 1 of Robust Sim-to-Real Cloth Untangling" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/ZeoBs-t0AWc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/ZeoBs-t0AWc/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">CASE</span><span class="year-tag">2026</span></div>
+                            <div class="pub-title">Robust Sim-to-Real Cloth Untangling through Reduced-Resolution
+                                Observations via Adaptive Force-Difference Quantization</div>
+                            <p class="pub-authors">Yoshihisa Tsurumine, <strong>Yuki Kadokawa</strong>, Kohei Hayashi,
+                                Christian Diehm, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">IEEE International Conference on Automation Science and Engineering
+                                (CASE), 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2603.13785" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/ZeoBs-t0AWc" target="_blank" rel="noopener"><svg
+                                        class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://sony.github.io/QuietWalk/" target="_blank" rel="noopener"><img src="figs/quiet-walk.jpg" alt="Figure 1 of Learning Quiet Walking for a Small Home Robot" loading="lazy"></a>
+                        <a class="pub-vid" href="https://www.youtube.com/watch?v=6RjkBHSYEcc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/6RjkBHSYEcc/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">ICRA</span><span class="year-tag">2025</span></div>
+                            <div class="pub-title">Learning Quiet Walking for a Small Home Robot</div>
+                            <p class="pub-authors">Ryo Watanabe, Takahiro Miki, Fan Shi, <strong>Yuki Kadokawa</strong>,
+                                Filip Bjelonic, Kento Kawaharazuka, Andrei Cramariuc, and Marco Hutter</p>
+                            <p class="pub-venue">International Conference on Robotics and Automation (ICRA), 2025</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2502.10983" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://sony.github.io/QuietWalk/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-globe" /></svg>Project Page</a>
+                                <a class="btn" href="https://www.youtube.com/watch?v=6RjkBHSYEcc" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">AROB</span><span class="year">2025</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">Scalable Domain Randomized Reinforcement Learning for Sim-to-Real
+                                Policy Transfer in Complex Robot Tasks</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">International Symposium on Artificial Life and Robotics (AROB), 2025</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://isarob.org/symposium/index.php?main_page=timetable"
+                                    target="_blank" rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://omron-sinicx.github.io/powder-weighing/" target="_blank" rel="noopener"><img src="figs/powder.jpg" alt="Figure 1 of Learning Robotic Powder Weighing from Simulation" loading="lazy"></a>
+                        <a class="pub-vid" href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/JTltnQrI5sg/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag">IROS</span><span class="year-tag">2023</span></div>
+                            <div class="pub-title">Learning Robotic Powder Weighing from Simulation for Laboratory
+                                Automation</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Masashi Hamaya, and Kazutoshi Tanaka
+                            </p>
+                            <p class="pub-venue">IEEE/RSJ International Conference on Intelligent Robots and Systems
+                                (IROS), 2023</p>
+                            <div class="pub-links">
+                                <a class="btn"
+                                    href="https://www.researchgate.net/publication/373992199_Learning_Robotic_Powder_Weighing_from_Simulation_for_Laboratory_Automation"
+                                    target="_blank" rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://omron-sinicx.github.io/powder-weighing/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-globe" /></svg>Project Page</a>
+                                <a class="btn" href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">ICRA</span><span class="year">2023</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">Binarized P-Network: Deep Reinforcement Learning of Robot Control from
+                                Raw Images on FPGA</div>
+                            <p class="pub-authors"><strong>Yuki Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu
+                                Matsubara</p>
+                            <p class="pub-venue">IEEE International Conference on Robotics and Automation (ICRA, RA-L
+                                option), 2023</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2109.04966" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://www.youtube.com/watch?v=FDM_bT0-RyY" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub haspic">
+                        <a class="pub-thumb" href="https://arxiv.org/pdf/2603.08111" target="_blank" rel="noopener"><img src="figs/dereco.jpg" alt="Figure 1 of DeReCo" loading="lazy"></a>
+                        <a class="pub-vid" href="https://youtu.be/V5CYCjXRUb8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/V5CYCjXRUb8/hqdefault.jpg" alt="Video thumbnail" loading="lazy"><span class="play" aria-hidden="true"></span></a>
+                        <div class="pub-body">
+                            <div class="pub-meta"><span class="venue-tag review">Under Review</span></div>
+                            <div class="pub-title">DeReCo: Decoupling Representation and Coordination Learning for
+                                Object-Adaptive Decentralized Multi-Robot Cooperative Transport</div>
+                            <p class="pub-authors">Kazuki Shibata, Ryosuke Sota, Shandil Dhiresh Bosch, <strong>Yuki
+                                    Kadokawa</strong>, Yoshihisa Tsurumine, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">Under review</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://arxiv.org/pdf/2603.08111" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-paper" /></svg>Paper</a>
+                                <a class="btn" href="https://youtu.be/V5CYCjXRUb8?si=OytW0Z9La5P8OuIm" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pub-group">
+                    <h3>Domestic Conference</h3>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">SICE SI</span><span class="year">2025</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">段階的解像度シミュレーションを用いた土砂の挙動を再現する粒子パラメータ自動推定</div>
+                            <p class="pub-authors">金加喜, <strong>角川勇貴</strong>, Sandro Manuel Alcantara Tacora, 阿部太郎, 遠藤大輔,
+                                山内元貴, 橋本毅, 松原崇充</p>
+                            <p class="pub-venue">計測自動制御学会システムインテグレーション部門講演会, 2025</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://sice-si.org/si2025/programs.php" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">RSJ</span><span class="year">2025</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">ドメインランダム化強化学習による油圧ショベルの土砂中の障害物除去タスク実現</div>
+                            <p class="pub-authors"><strong>角川勇貴</strong>, Sandro Manuel Alcantara Tacora, 松原崇充</p>
+                            <p class="pub-venue">日本ロボット学会学術講演会, 2025</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ac.rsj-web.org/2025/program.html" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">RSJ</span><span class="year">2025</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">到達状態拡張による対照強化学習の汎化</div>
+                            <p class="pub-authors">中村維冴, 山之口智也, <strong>角川勇貴</strong>, 曲佳, 大坪舜, 宮本健, 三輪祥太郎, 松原崇充</p>
+                            <p class="pub-venue">日本ロボット学会学術講演会, 2025</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ac.rsj-web.org/2025/program.html" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">RSJ</span><span class="year">2025</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">柔軟な群ロボット協調輸送のための非対称アクター・クリティック型マルチエージェント強化学習</div>
+                            <p class="pub-authors">曽田涼介, 柴田一騎, 鶴峯義久, <strong>角川勇貴</strong>, 松原崇充</p>
+                            <p class="pub-venue">日本ロボット学会学術講演会, 2025</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ac.rsj-web.org/2025/program.html" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">RSJ</span><span class="year">2024</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">Deep Reinforcement Learning with FPNN-to-SNN Policy Distillation for
+                                Neurochip-driven Robots<span class="award-tag"><svg class="ic"><use href="#i-award" /></svg>Best
+                                    Presentation Award Finalist</span></div>
+                            <p class="pub-authors">Alonso Ramos Fernandez, <strong>Yuki Kadokawa</strong>, Yoshihisa
+                                Tsurumine, and Takamitsu Matsubara</p>
+                            <p class="pub-venue">Annual Conference of the Robotics Society of Japan, 2024</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ac.rsj-web.org/2024/program.html" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">ROBOMECH</span><span class="year">2024</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">Sim-to-Real 方策転移のためのダイナミクスランダム化対照強化学習</div>
+                            <p class="pub-authors">中村維冴, 山之口智也, <strong>角川勇貴</strong>, 曲佳, 大坪舜, 三輪祥太郎, 松原崇充</p>
+                            <p class="pub-venue">ロボティクス・メカトロニクス講演会, 2024</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://robomech.org/2024/" target="_blank" rel="noopener"><svg
+                                        class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">SICE MSCS</span><span class="year">2023</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">ニューロチップ実装に適した量子化方策のエッジサーバー深層強化学習</div>
+                            <p class="pub-authors">小寺智仁, <strong>角川勇貴</strong>, 鶴峯義久, 松原崇充</p>
+                            <p class="pub-venue">計測自動制御学会制御部門マルチシンポジウム, 2023</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://mscs2023.sice-ctrl.jp/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">RSJ</span><span class="year">2020</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">FPGAを用いた実時間ロボット制御のための深層強化学習手法 Binary P-Network の提案</div>
+                            <p class="pub-authors"><strong>角川勇貴</strong>, 鶴峯義久, 松原崇充</p>
+                            <p class="pub-venue">日本ロボット学会学術講演会, 2020</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://ac.rsj-web.org/2020/program.html" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-link" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pub-group">
+                    <h3>Invited Talk</h3>
+
+                    <article class="pub">
+                        <div class="pub-badge"><span class="venue">SICE DAS</span><span class="year">2026</span></div>
+                        <div class="pub-body">
+                            <div class="pub-title">実世界ロボットタスクにおけるSim-to-Real強化学習: パーティクルシミュレーションにおける計算量と精度のトレードオフ</div>
+                            <p class="pub-authors"><strong>角川勇貴</strong>, 松原崇充</p>
+                            <p class="pub-venue">計測自動制御学会 自律分散システム・シンポジウム, 2026</p>
+                            <div class="pub-links">
+                                <a class="btn" href="https://sites.google.com/sice-das.org/das38th" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-mic" /></svg>Conference</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Honors: Awards + Grants ===== -->
+        <section id="honors">
+            <div class="section-head">
+                <h2>Honors</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="display:flex;align-items:center;gap:9px;margin-bottom:14px;">
+                        <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href="#i-award" /></svg>Awards
+                    </h3>
+                    <ol class="clean">
+                        <li>Outstanding Student Award, Symposium of University Fellowship, NAIST, 2022
+                            <a href="http://isw3.naist.jp/IS/PubWG/Events-ja/award20221007_kadokawa.html" target="_blank"
+                                rel="noopener">[Award Page]</a>
+                        </li>
+                        <li>Student Paper Award, IEEE Kansai Section, 2022
+                            <a href="http://isw3.naist.jp/IS/PubWG/Events-ja/award20220222_kadokawa.html" target="_blank"
+                                rel="noopener">[NAIST]</a>
+                            <a href="https://www.ieee-jp.org/section/kansai/award/studentlist.html" target="_blank"
+                                rel="noopener">[IEEE]</a>
+                        </li>
+                        <li>Best Student of the Year, Toyama Prefectural University, 2019</li>
+                        <li>Grand Prize, Monozukuri in Toyama, Toyama Mechanical and Electrical Industries Association,
+                            2018</li>
+                        <li>Best Presentation Award, Design Competition, Japan Society for Design Engineering, 2018</li>
+                        <li>3rd Place (National Finals 3/10), Design Competition, Japan Society for Design Engineering,
+                            2018</li>
+                        <li>Best Student Presentation Award, Research Presentation, Japan Society for Design Engineering,
+                            2018</li>
+                        <li>Best Presentation Award, Design Competition, Japan Society for Design Engineering, 2017</li>
+                        <li>Best Student of the Year, Toyama Prefectural Takaoka Kogei High School, 2015</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h3 style="display:flex;align-items:center;gap:9px;margin-bottom:14px;">
+                        <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href="#i-gift" /></svg>Scholarship
+                        &amp; Grant
+                    </h3>
+                    <ol class="clean">
+                        <li>Senju Monju Project (Research Grant), NAIST, 2024–2026</li>
+                        <li>Scholarship (Return Exemption, Full Amount), Japan Student Services Organization, 2023</li>
+                        <li>Research Fellowship for Young Scientists: DC2 (Funding &amp; Salary), JSPS, 2023–2025</li>
+                        <li>Research Fellowship (Research Grant &amp; Salary), Japan Science and Technology Agency,
+                            2022–2023
+                            <a href="http://isw3.naist.jp/IS/is-fellowship/pr/interview/2022/kadokawa/index.html"
+                                target="_blank" rel="noopener">[Interview]</a>
+                        </li>
+                        <li>Scholarship (Return Exemption, Half Amount), Japan Student Services Organization, 2021</li>
+                        <li>Outstanding Student Scholarship (Tuition Exemption), NAIST, 2021</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Experience: Work + Education ===== -->
+        <section id="experience">
+            <div class="section-head">
+                <h2>Experience &amp; Education</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="display:flex;align-items:center;gap:9px;margin-bottom:16px;">
+                        <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href="#i-briefcase" /></svg>Work
+                        History
+                    </h3>
+                    <ul class="timeline">
+                        <li>
+                            <div class="t-when">Apr 2024 – Mar 2026</div>
+                            <div class="t-what">Project Assistant Professor</div>
+                            <div class="t-where">Robot Learning Lab, NAIST</div>
+                        </li>
+                        <li>
+                            <div class="t-when">Aug 2023 – Oct 2023</div>
+                            <div class="t-what">Visiting Researcher</div>
+                            <div class="t-where">Robotic Systems Lab, ETH Zürich</div>
+                        </li>
+                        <li>
+                            <div class="t-when">Apr 2022 – Mar 2023</div>
+                            <div class="t-what">Research Internship</div>
+                            <div class="t-where">OMRON SINIC X Corporation</div>
+                            <div class="pub-links">
+                                <a class="btn" href="https://omron-sinicx.github.io/powder-weighing/" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-globe" /></svg>Project Page</a>
+                                <a class="btn" href="https://www.youtube.com/watch?v=JTltnQrI5sg" target="_blank"
+                                    rel="noopener"><svg class="ic"><use href="#i-video" /></svg>Video</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="t-when">Dec 2018 – Mar 2019</div>
+                            <div class="t-what">Part-time, 3D-CAD Modeling</div>
+                            <div class="t-where">Aluminum Factory Corporation</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 style="display:flex;align-items:center;gap:9px;margin-bottom:16px;">
+                        <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href="#i-cap" /></svg>Education
+                    </h3>
+                    <ul class="timeline">
+                        <li>
+                            <div class="t-when">2024</div>
+                            <div class="t-what">Doctor of Engineering</div>
+                            <div class="t-where">Program of Information Science and Engineering, NAIST, Japan</div>
+                        </li>
+                        <li>
+                            <div class="t-when">2021</div>
+                            <div class="t-what">Master of Engineering</div>
+                            <div class="t-where">Program of Information Science and Engineering, NAIST, Japan</div>
+                        </li>
+                        <li>
+                            <div class="t-when">2019</div>
+                            <div class="t-what">Bachelor of Engineering</div>
+                            <div class="t-where">Department of Intelligent Robotics, Toyama Prefectural University, Japan
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Research ===== -->
+        <section id="research">
+            <div class="section-head">
+                <h2>Research Field</h2>
+            </div>
+            <div class="card">
+                <div class="chips">
+                    <span class="chip">Reinforcement Learning</span>
+                    <span class="chip">Deep Learning</span>
+                    <span class="chip">Robotics</span>
+                    <span class="chip">Sim-to-Real</span>
+                    <span class="chip">Domain Randomization</span>
+                    <span class="chip">Edge Robots</span>
+                    <span class="chip">FPGA</span>
+                    <span class="chip">Neurochip</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Contact ===== -->
+        <section id="contact">
+            <div class="section-head">
+                <h2>Contact</h2>
+            </div>
+            <div class="card">
+                <div class="contact-grid">
+                    <div class="row">
+                        <svg class="ic"><use href="#i-mail" /></svg>
+                        <div>
+                            <div class="label">E-mail</div>
+                            <div>kadokawa.yuki <span>[at]</span> naist.ac.jp
+                                <button class="btn" id="emailBtn2" type="button" style="margin-left:8px;cursor:pointer;">
+                                    <svg class="ic"><use href="#i-mail" /></svg>Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <svg class="ic"><use href="#i-pin" /></svg>
+                        <div>
+                            <div class="label">Address</div>
+                            <div>8916-5 Takayama-cho, Ikoma, Nara 630-0192, Japan</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <svg class="ic"><use href="#i-flask" /></svg>
+                        <div>
+                            <div class="label">Affiliation</div>
+                            <div>Nara Institute of Science and Technology, Robot Learning Laboratory</div>
+                        </div>
+                    </div>
+                    <div class="socials" style="margin-top:6px;">
+                        <a href="https://scholar.google.com/citations?hl=en&user=7vig4HcAAAAJ" target="_blank"
+                            rel="noopener"><svg class="ic"><use href="#i-scholar" /></svg> Google Scholar</a>
+                        <a href="https://github.com/yuki-kadokawa" target="_blank" rel="noopener"><svg class="ic"><use
+                                    href="#i-github" /></svg> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site">
+        © <span id="year"></span> Yuki Kadokawa · Built with care for research &amp; robotics.
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        document.getElementById('emailLink').addEventListener('click', function () {
-            var email = 'kadokawa.yuki@naist.ac.jp';
-            var textarea = document.createElement('textarea');
-            textarea.value = email;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('E-Mail address is copied to clipboard: ' + email);
-        });
-    </script>
+        (function () {
+            // ---- Theme toggle ----
+            var root = document.documentElement;
+            var toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    root.setAttribute('data-theme', next);
+                    try { localStorage.setItem('theme', next); } catch (e) { }
+                });
+            }
 
+            // ---- Footer year ----
+            var y = document.getElementById('year');
+            if (y) y.textContent = new Date().getFullYear();
+
+            // ---- Toast helper ----
+            var toastEl = document.getElementById('toast');
+            var toastTimer;
+            function toast(msg) {
+                if (!toastEl) return;
+                toastEl.textContent = msg;
+                toastEl.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2200);
+            }
+
+            // ---- Copy e-mail ----
+            var EMAIL = ['kadokawa.yuki', 'naist.ac.jp'].join('@');
+            function copyEmail() {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(EMAIL).then(
+                        function () { toast('E-mail copied: ' + EMAIL); },
+                        function () { fallbackCopy(); }
+                    );
+                } else { fallbackCopy(); }
+            }
+            function fallbackCopy() {
+                var ta = document.createElement('textarea');
+                ta.value = EMAIL;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); toast('E-mail copied: ' + EMAIL); }
+                catch (e) { toast(EMAIL); }
+                document.body.removeChild(ta);
+            }
+            ['emailBtn', 'emailBtn2'].forEach(function (id) {
+                var b = document.getElementById(id);
+                if (b) b.addEventListener('click', copyEmail);
+            });
+
+            // ---- Active nav highlight ----
+            var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav.primary a'));
+            var map = {};
+            navLinks.forEach(function (a) {
+                var id = a.getAttribute('href').slice(1);
+                var sec = document.getElementById(id);
+                if (sec) map[id] = a;
+            });
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting) {
+                            navLinks.forEach(function (a) { a.classList.remove('active'); });
+                            var a = map[en.target.id];
+                            if (a) a.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+                Object.keys(map).forEach(function (id) { obs.observe(document.getElementById(id)); });
+            }
+        })();
+    </script>
 </body>
 
 </html>
